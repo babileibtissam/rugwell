@@ -22,7 +22,7 @@ class _ShopPageState extends State<ShopPage> {
         context: context,
         builder: (context) => AlertDialog(
               title: Text('successfully added'),
-              content: Text('chek your cart'),
+              content: Text('check your cart'),
             ));
   }
 
@@ -68,13 +68,6 @@ class _ShopPageState extends State<ShopPage> {
                     fontSize: 30,
                   ),
                 ),
-                // Text(
-                //   'See All',
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.bold,
-                //     color: Colors.blue,
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -88,7 +81,7 @@ class _ShopPageState extends State<ShopPage> {
               itemCount: 6,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                Rug rug = value.getRugList()[index];
+                Rug rug = value.getRugList('')[index];
                 //return rug
                 return RugTile(
                   rug: rug,

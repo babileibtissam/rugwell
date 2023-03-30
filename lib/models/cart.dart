@@ -1,45 +1,47 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:rugwell/models/rugs.dart';
 
 class Cart extends ChangeNotifier {
   List<Rug> rugShop = [
     Rug(
-      name: 'moroccan rug',
+      name: 'Asati Rug',
       price: '2500',
       imagePath: 'assets/images/rug3.png',
       description:
           'Fabulous Taznakht rug, Home Decor, Area Rug, Beautiful Moroccan Berber Rug ( 254 x 265 CM )',
     ),
     Rug(
-      name: 'moroccan rug',
+      name: 'Abran Rug',
       price: '2500',
       imagePath: 'assets/images/rug4.png',
       description:
           'handmade Moroccan rug moroccan traditional carpets personalized rug wool (254 x 250 CM)',
     ),
     Rug(
-      name: 'moroccan rug',
+      name: 'Amyanaw Rug',
       price: '1000',
       imagePath: 'assets/images/rug2.png',
       description:
-          'moroccan rug, hand made rug, taznakht rugs, Berber natural wool rug, New rug, woven rug, moroccan traditional carpets (150 x 250 CM)',
+          'moroccan rug, hand made rug, taznakht rugs,moroccan traditional carpets (150 x 250 CM)',
     ),
     Rug(
-      name: 'moroccan rug',
+      name: 'Takhlalt Rug',
       price: '1200',
       imagePath: 'assets/images/rug7.png',
       description:
           'Handmade Berber Rug Moroccan Taznakht Wool Carpet Women Weavers (250 x 300 CM)',
     ),
     Rug(
-      name: 'moroccan rug',
+      name: 'Amdrar Rug',
       price: '2700',
       imagePath: 'assets/images/rug1.png',
       description:
           'Unique Taznakht rug, Moroccan Berber Rug, home decor ( 152 x 220 CM )',
     ),
     Rug(
-      name: 'moroccan rug',
+      name: 'Asati Rug',
       price: '1200',
       imagePath: 'assets/images/rug5.png',
       description:
@@ -49,14 +51,32 @@ class Cart extends ChangeNotifier {
 
   // list of rugs in user cart
   List<Rug> userCart = [];
+
+  // list of rugs in user favorite
+  List<Rug> userFavorite = [];
+
   // list of rugs for sales
-  List<Rug> getRugList() {
-    return rugShop;
+  List<Rug> getRugList(String search) {
+    if (search.length == 0) {
+      return rugShop;
+    } else {
+      // log(search);
+      // log(rugShop
+      //     .where((rug) => rug.name.contains(search))
+      //     .toList()
+      //     .toString());
+      return rugShop.where((rug) => rug.name.contains(search)).toList();
+    }
   }
 
   // get cart
   List<Rug> getUserCart() {
     return userCart;
+  }
+
+  // get favorite
+  List<Rug> getUserFavorite() {
+    return userFavorite;
   }
 
   // add item to cart
@@ -71,11 +91,15 @@ class Cart extends ChangeNotifier {
     notifyListeners();
   }
 
-  // String calculateTotal() {
-  //   double totalPrice = 0;
-  //   for (int i = 0; i < userCart.length; i++) {
-  //     totalPrice += double.parse(userCart[i][1]);
-  //   }
-  //   return totalPrice.toStringAsFixed(2);
-  // }
+  // add item to Favorite
+  void addItemToFavorite(Rug rug) {
+    userFavorite.add(rug);
+    notifyListeners();
+  }
+
+  // remove item from Favorite
+  void removeItemFromFavorite(Rug rug) {
+    userFavorite.remove(rug);
+    notifyListeners();
+  }
 }

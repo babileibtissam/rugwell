@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rugwell/screens/about_page.dart';
-
-import 'package:rugwell/screens/cart_page.dart';
-import 'package:rugwell/screens/login_or_register.dart';
-import 'package:rugwell/screens/shop_page.dart';
-import 'package:rugwell/widgets/bottom_navbar.dart';
+import 'package:rugwell/screens/homecart_page.dart';
+import 'package:rugwell/screens/favorits_page.dart';
+import 'package:rugwell/screens/intro_page.dart';
+import '../widgets/home_bottomnavbar.dart';
+import 'homeshop_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -26,16 +26,18 @@ class _HomePageState extends State<HomePage> {
   //pages to display
   final List<Widget> _pages = [
     // shop page
-    ShopPage(),
+    const HomeShopPage(),
     // Cart page
-    const CartPage(),
+    const Cart2Page(),
+    // favorite page
+    const FavoritePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 207, 207, 207),
-      bottomNavigationBar: BottomNavBar(
+      bottomNavigationBar: HomeBottomNavBar(
         onTabChange: (index) => navigateBottomBar(index),
       ),
       appBar: AppBar(
@@ -72,7 +74,12 @@ class _HomePageState extends State<HomePage> {
                   size: 30,
                 ),
                 title: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => IntroPage()),
+                    );
+                  },
                   child: const Text(
                     'Logout',
                     style: TextStyle(fontSize: 18),
@@ -91,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                          builder: (BuildContext context) => AboutPage()),
+                          builder: (BuildContext context) => const AboutPage()),
                     );
                   },
                   child: const Text(

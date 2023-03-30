@@ -19,7 +19,6 @@ class LoginPage extends StatefulWidget {
   // State<LoginPage> createState() => _LoginPageState();
 }
 
-// RegExp regExp = new RegExp(p);
 bool obserText = true;
 
 // void validation() {
@@ -52,8 +51,11 @@ class _LoginPageState extends State<LoginPage> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
 
-      //pop loading circle
-      Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
     } on FirebaseAuthException catch (e) {
       //pop loading circle
       Navigator.pop(context);
@@ -138,15 +140,6 @@ class _LoginPageState extends State<LoginPage> {
                         ? ""
                         : "Please enter a valid email",
                   ),
-
-                  //   validator: (value) {
-                  //     if (value == "") {
-                  //       return "Please Fill Email";
-                  //     } else if (!regExp.hasMatch(value!)) {
-                  //       return "Email Is Invalid";
-                  //     }
-                  //     return "";
-                  //   },
                 ),
                 const SizedBox(height: 10),
                 //Password textfield
